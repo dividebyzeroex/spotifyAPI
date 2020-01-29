@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </nav>
-                <form method="POST" action="./app.php">
+                <form method="POST" action="'.echo $_SERVER['PHP_SELF'].'">
                 <div class="row">';
         foreach ($playlists->items as $playlist) {
             echo '<div class="col-sm-2">
