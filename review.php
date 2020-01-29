@@ -8,65 +8,66 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <body>
+      <?php
+          require 'vendor/autoload.php';
 
-<?php
-    require 'vendor/autoload.php';
-
-    $session = new SpotifyWebAPI\Session(
-      'd0233e3bddf647c3821fac68bb2d4aa5',
-      '899917c0583a471f8cf524aba161daf0',
-      'https://minhaplaylist.azurewebsites.net/review.php'
-  );
-  
-  // Request a access token using the code from Spotify
-  try {
-         if(isset($_GET['code'])){
-          $session->requestAccessToken($_GET['code']);
-          $_SESSION["codeSession"] = $_GET['code'];
-          $accessToken = $session->getAccessToken();
-          $_SESSION["refreshToken"] = $session->getRefreshToken();
-      }else{
-          $session->refreshAccessToken($_SESSION["refreshToken"]);
-          $accessToken = $session->getAccessToken();
-      }
-     
-  } catch (\Throwable $th) {
-      $session->refreshAccessToken($_SESSION["refreshToken"]);
-      $accessToken = $session->getAccessToken();
-  }
-  
-  $api = new SpotifyWebAPI\SpotifyWebAPI();
-  $api->setAccessToken($accessToken);
-
-    session_start();
-    echo '<div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Vamos revisar juntos?</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-            <ul class="list-group list-group-flush">';
-            if(!empty($_POST['playselection'])){
-                $_SESSION["playSelection"] = $_POST['playselection'];
-                foreach($_POST['playselection'] as $selected){
-                    $playlistName = $api->getPlaylist($selected);                    
-                    echo'<li class="list-group-item">'.$playlistName->name.'</li>';
-                }
-               echo '<script>
-                    $("#exampleModalCenter").modal();
-                 </script>';
+          $session = new SpotifyWebAPI\Session(
+            'd0233e3bddf647c3821fac68bb2d4aa5',
+            '899917c0583a471f8cf524aba161daf0',
+            'https://minhaplaylist.azurewebsites.net/review.php'
+          );
+        
+        // Request a access token using the code from Spotify
+        try {
+            if(isset($_GET['code'])){
+                $session->requestAccessToken($_GET['code']);
+                $_SESSION["codeSession"] = $_GET['code'];
+                $accessToken = $session->getAccessToken();
+                $_SESSION["refreshToken"] = $session->getRefreshToken();
+            }else{
+                $accessToken = $session->getAccessToken();
+                $_SESSION["refreshToken"] = $session->getRefreshToken();
+                $session->refreshAccessToken($_SESSION["refreshToken"]);
+                $accessToken = $session->getAccessToken();
             }
-            echo '</ul>
-            </div>
-            <div class="modal-footer">
-            <form action="processa.php" Method="POST">
-              <button type="submit" class="btn btn-primary">Tudo pronto, Juntar Playlists!</button>
-            </form>
-            </div>
-          </div>';
-?>
+          
+        } catch (\Throwable $th) {
+            $session->refreshAccessToken($_SESSION["refreshToken"]);
+            $accessToken = $session->getAccessToken();
+        }
+        
+        $api = new SpotifyWebAPI\SpotifyWebAPI();
+        $api->setAccessToken($accessToken);
+
+          session_start();
+          echo '<div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Vamos revisar juntos?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                  <ul class="list-group list-group-flush">';
+                  if(!empty($_POST['playselection'])){
+                      $_SESSION["playSelection"] = $_POST['playselection'];
+                      foreach($_POST['playselection'] as $selected){
+                          $playlistName = $api->getPlaylist($selected);                    
+                          echo'<li class="list-group-item">'.$playlistName->name.'</li>';
+                      }
+                    echo '<script>
+                          $("#exampleModalCenter").modal();
+                      </script>';
+                  }
+                  echo '</ul>
+                  </div>
+                  <div class="modal-footer">
+                  <form action="processa.php" Method="POST">
+                    <button type="submit" class="btn btn-primary">Tudo pronto, Juntar Playlists!</button>
+                  </form>
+                  </div>
+                </div>';
+      ?>
 </body>
 </html>
