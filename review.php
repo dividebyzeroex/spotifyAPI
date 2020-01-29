@@ -10,7 +10,35 @@
     <body>
 
 <?php
+    require 'vendor/autoload.php';
 
+    $session = new SpotifyWebAPI\Session(
+      'd0233e3bddf647c3821fac68bb2d4aa5',
+      '899917c0583a471f8cf524aba161daf0',
+      'https://minhaplaylist.azurewebsites.net/review.php'
+  );
+  
+  // Request a access token using the code from Spotify
+  try {
+         if(isset($_GET['code'])){
+          $session->requestAccessToken($_GET['code']);
+          $_SESSION["codeSession"] = $_GET['code'];
+          $accessToken = $session->getAccessToken();
+          $_SESSION["refreshToken"] = $session->getRefreshToken();
+      }else{
+          $session->refreshAccessToken($_SESSION["refreshToken"]);
+          $accessToken = $session->getAccessToken();
+      }
+     
+  } catch (\Throwable $th) {
+      $session->refreshAccessToken($_SESSION["refreshToken"]);
+      $accessToken = $session->getAccessToken();
+  }
+  
+  $api = new SpotifyWebAPI\SpotifyWebAPI();
+  $api->setAccessToken($accessToken);
+
+    session_start();
     echo '<div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
