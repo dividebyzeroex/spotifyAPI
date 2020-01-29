@@ -21,16 +21,11 @@
         
         // Request a access token using the code from Spotify
         try {
-            if(isset($_GET['code'])){
                 $session->requestAccessToken($_GET['code']);
                 $_SESSION["codeSession"] = $_GET['code'];
                 $accessToken = $session->getAccessToken();
                 $_SESSION["refreshToken"] = $session->getRefreshToken();
-            }else{
-                $session->refreshAccessToken($_SESSION["refreshToken"]);
-                $accessToken = $session->getAccessToken();
-            }
-            
+           
         } catch (\Throwable $th) {
             $session->refreshAccessToken($_SESSION["refreshToken"]);
             $accessToken = $session->getAccessToken();
