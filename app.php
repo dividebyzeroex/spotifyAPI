@@ -16,12 +16,12 @@
         $session = new SpotifyWebAPI\Session(
             'd0233e3bddf647c3821fac68bb2d4aa5',
             '899917c0583a471f8cf524aba161daf0',
-            'http://localhost:81/OrganizaSpotify/app.php'
+            'https://minhaplaylist.azurewebsites.net/app.php'
         );
         
         // Request a access token using the code from Spotify
         try {
-            if(isset($_GET['code'])){
+               if(isset($_GET['code'])){
                 $session->requestAccessToken($_GET['code']);
                 $_SESSION["codeSession"] = $_GET['code'];
                 $accessToken = $session->getAccessToken();
@@ -30,7 +30,7 @@
                 $session->refreshAccessToken($_SESSION["refreshToken"]);
                 $accessToken = $session->getAccessToken();
             }
-            
+           
         } catch (\Throwable $th) {
             $session->refreshAccessToken($_SESSION["refreshToken"]);
             $accessToken = $session->getAccessToken();
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </nav>
-                <form method="POST" action="#">
+                <form method="POST" action="'.$_SERVER['PHP_SELF'].'">
                 <div class="row">';
         foreach ($playlists->items as $playlist) {
             echo '<div class="col-sm-2">
@@ -112,7 +112,7 @@
             echo '</ul>
             </div>
             <div class="modal-footer">
-            <form action="processa.php" Method="POST">
+            <form action="./processa.php" Method="POST">
               <button type="submit" class="btn btn-primary">Tudo pronto, Juntar Playlists!</button>
             </form>
             </div>
