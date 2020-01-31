@@ -37,9 +37,9 @@
                         $track->track->id
                     ]);
                    } catch (\Throwable $th) {
-                    //echo $th;
+                    echo $th;
                     //header('Location: app.php?result=erro');
-                    //die();
+                    die();
                 }
             }
             
