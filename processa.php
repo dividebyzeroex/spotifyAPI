@@ -14,14 +14,14 @@
     set_time_limit(600);
     session_start();
 
-          $api = new SpotifyWebAPI\SpotifyWebAPI();
+        $api = new SpotifyWebAPI\SpotifyWebAPI();
 
-          // Fetch the saved access token from somewhere. A database for example.
-          $api->setAccessToken($_GET['code']);
-          $user = $api->me();
-          $playid = $api->createPlaylist([
-                'name' => '@eu.jpe - TudoEm1'
-            ]);
+        // Fetch the saved access token from somewhere. A database for example.
+        $api->setAccessToken($_GET['code']);
+        $user = $api->me();
+        $playid = $api->createPlaylist([
+            'name' => '@eu.jpe - TudoEm1'
+        ]);
 
        
         $imageData = base64_encode(file_get_contents('cover.jpg'));
