@@ -27,6 +27,7 @@
                   <div class="modal-body">
                   <ul class="list-group list-group-flush">';
                   if(!empty($_POST['playselection'])){
+                    $_SESSION['playSelection'] = $_POST['playselection'];
                     foreach($_POST['playselection'] as $selected){
                       try {
                         $playlistName = $api->getPlaylist($selected);                   
