@@ -27,14 +27,9 @@
         $imageData = base64_encode(file_get_contents('cover.jpg'));
         
         $api->updatePlaylistImage($playid->id, $imageData);
-        
-        print_r($_POST['processaMusic']);
-        die();
-        foreach($_SESSION['playSelection'] as $selected){
-            echo $_SESSION['playSelection'];
-            die();
+    
+        foreach($_POST['processaMusic'] as $selected){            
             $playlistTracks = $api->getPlaylistTracks($selected);
-            
             foreach ($playlistTracks->items as $track) {
                 try {
                     sleep(0.3);
