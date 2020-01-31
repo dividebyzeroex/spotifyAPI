@@ -12,39 +12,10 @@
           require 'vendor/autoload.php';
           session_start();
 
-          $session = new SpotifyWebAPI\Session(
-            'd0233e3bddf647c3821fac68bb2d4aa5',
-            '899917c0583a471f8cf524aba161daf0',
-            'https://minhaplaylist.azurewebsites.net/app.php'
-          );
-        
-        /// Request a access token using the code from Spotify
-        try {
-          if(isset($_GET['code'])){
-            echo '1';
-           $session->requestAccessToken($_GET['code']);
-           echo '2';
-           $_SESSION["codeSession"] = $_GET['code'];
-           echo '3';
-           $accessToken = $session->getAccessToken();
-           echo '4';
-           $_SESSION["refreshToken"] = $session->getRefreshToken();
-           echo '5';
-          }else{
-            echo '6';
-            $session->refreshAccessToken($_SESSION["refreshToken"]);
-            echo '7';
-            $accessToken = $session->getAccessToken();
-          }
-      
-        } catch (\Throwable $th) {
-            echo $th;
-            $session->refreshAccessToken($_SESSION["refreshToken"]);
-            $accessToken = $session->getAccessToken();
-        }
-        
-        $api = new SpotifyWebAPI\SpotifyWebAPI();
-        $api->setAccessToken($accessToken);
+          $api = new SpotifyWebAPI\SpotifyWebAPI();
+
+          // Fetch the saved access token from somewhere. A database for example.
+          $api->setAccessToken($accessToken);
 
           echo '<div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
