@@ -11,7 +11,7 @@
 <?php
         require 'vendor/autoload.php';
 
-        set_time_limit(600);
+        set_time_limit(1800);
         session_start();
 
         $api = new SpotifyWebAPI\SpotifyWebAPI();
@@ -21,34 +21,46 @@
         $user = $api->me();
         $playid = $api->createPlaylist([
             'name' => '@eu.jpe - TudoEm1'
-        ]);
-
-       
+        ]);       
         $imageData = base64_encode(file_get_contents('cover.jpg'));
-        
         $api->updatePlaylistImage($playid->id, $imageData);
     
         foreach($_POST['processaMusic'] as $selected){            
             $playlistTracks = $api->getPlaylistTracks($selected);
            foreach ($playlistTracks->items as $track) {
                 try {
-                    sleep(0.3);
+                    sleep(0.2);
                     $api->addPlaylistTracks($playid->id, [
                         $track->track->id
                     ]);
                    } catch (\Throwable $th) {
-                    echo $th;
-                    echo 'trackid'.$track->track->id;
+                    
                     //header('Location: app.php?result=erro');
-                    die();
+                    //die();
                 }
             }
             
         }
 
-        ob_start();
-        header('Location: https://minhaplaylist.azurewebsites.net/');
-        exit();
+        $session = new SpotifyWebAPI\Session(
+            'd0233e3bddf647c3821fac68bb2d4aa5',
+            '899917c0583a471f8cf524aba161daf0',
+            'https://minhaplaylist.azurewebsites.net/app.php'
+        );
+        //$_SESSION["accessToken"] = $accessToken;
+        
+        $options = [
+            'scope' => [
+                'playlist-read-private',
+                'playlist-modify-private',
+                'user-read-private',
+                'playlist-modify-public',
+                'ugc-image-upload'
+            ],
+        ];
+        
+        header('Location: ' . $session->getAuthorizeUrl($options));
+        die();
 
 ?>
 </body>
