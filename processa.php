@@ -28,8 +28,7 @@
         
         $api->updatePlaylistImage($playid->id, $imageData);
         
-        echo $_SESSION['processaMusic'];
-        print_r($_SESSION['processaMusic']);
+        print_r($_POST['processaMusic']);
         die();
         foreach($_SESSION['playSelection'] as $selected){
             echo $_SESSION['playSelection'];

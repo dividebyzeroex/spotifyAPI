@@ -25,18 +25,20 @@
                     </a>
                   </div>
                   <div class="modal-body">
-                  <ul class="list-group list-group-flush">';
-                  if(!empty($_POST['playselection'])){
-                    $_SESSION['processaMusic'] = $_POST['playselection'];
-                    foreach($_POST['playselection'] as $selected){
-                      try {
-                        $playlistName = $api->getPlaylist($selected);                   
-                          echo'<li class="list-group-item">'.$playlistName->name.'</li>';
-                      } catch (\Throwable $th) {
-                        echo $th; 
-                      }
-                          
-                      }
+                  <ul class="list-group list-group-flush">
+                  <form action="./processa.php?code='.$_GET['code'].'" Method="POST">';
+                    if(!empty($_POST['playselection'])){
+                      $_SESSION['processaMusic'] = $_POST['playselection'];
+                      foreach($_POST['playselection'] as $selected){
+                        try {
+                          echo '<input type="checkbox" name="processaMusic[]" value="'.$selected.'" style="visibility:hidden;"/>';
+                          $playlistName = $api->getPlaylist($selected);                   
+                            echo'<li class="list-group-item">'.$playlistName->name.'</li>';
+                        } catch (\Throwable $th) {
+                          echo $th; 
+                        }
+                            
+                        }
                     echo '<script>
                           $("#exampleModalCenter").modal();
                       </script>';
@@ -44,7 +46,6 @@
                  echo '</ul>
                   </div>
                   <div class="modal-footer">
-                  <form action="./processa.php?code='.$_GET['code'].'" Method="POST">
                     <button type="submit" class="btn btn-primary">Tudo pronto, Juntar Playlists!</button>
                   </form>
                   </div>
