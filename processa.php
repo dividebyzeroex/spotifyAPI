@@ -9,10 +9,10 @@
     </head>
     <body>
 <?php
-    require 'vendor/autoload.php';
+        require 'vendor/autoload.php';
 
-    set_time_limit(600);
-    session_start();
+        set_time_limit(600);
+        session_start();
 
         $api = new SpotifyWebAPI\SpotifyWebAPI();
 
@@ -28,8 +28,9 @@
         
         $api->updatePlaylistImage($playid->id, $imageData);
         
-               echo $_SESSION['views'];
-            die();
+        echo $_SESSION['processaMusic'];
+        print_r($_SESSION['processaMusic']);
+        die();
         foreach($_SESSION['playSelection'] as $selected){
             echo $_SESSION['playSelection'];
             die();

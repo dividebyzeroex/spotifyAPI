@@ -27,7 +27,7 @@
                   <div class="modal-body">
                   <ul class="list-group list-group-flush">';
                   if(!empty($_POST['playselection'])){
-                    $_SESSION['playSelection'] = $_POST['playselection'];
+                    $_SESSION['processaMusic'] = $_POST['playselection'];
                     foreach($_POST['playselection'] as $selected){
                       try {
                         $playlistName = $api->getPlaylist($selected);                   
@@ -45,7 +45,6 @@
                   </div>
                   <div class="modal-footer">
                   <form action="./processa.php?code='.$_GET['code'].'" Method="POST">
-                    <input type="hidden" name="selectionMusic[]" value="'.$_POST['playselection'].'"/>
                     <button type="submit" class="btn btn-primary">Tudo pronto, Juntar Playlists!</button>
                   </form>
                   </div>
