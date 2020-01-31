@@ -41,6 +41,7 @@
                           $("#exampleModalCenter").modal();
                       </script>';
                   }
+                  echo 'post selection'.$_POST['playselection'];
                   echo '</ul>
                   </div>
                   <div class="modal-footer">
