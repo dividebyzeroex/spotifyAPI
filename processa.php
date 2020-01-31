@@ -46,8 +46,7 @@
             
         }
 
-        echo 'aqui';
-        header('Location: index.php');
+        header('Location: https://minhaplaylist.azurewebsites.net/');
         die();
 
 ?>
