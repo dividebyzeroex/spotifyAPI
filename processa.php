@@ -14,29 +14,16 @@
     set_time_limit(600);
     session_start();
 
-    $session = new SpotifyWebAPI\Session(
-        'd0233e3bddf647c3821fac68bb2d4aa5',
-        '899917c0583a471f8cf524aba161daf0',
-        'https://minhaplaylist.azurewebsites.net/processa.php'
-    );
-    
-    // Request a access token using the code from Spotify
-    try {
-        $session->requestAccessToken($_SESSION["codeSession"]);
-        $accessToken = $session->getAccessToken();
-        $_SESSION["refreshToken"] = $session->getRefreshToken();
-        
-    } catch (\Throwable $th) {
-        $session->refreshAccessToken($_SESSION["refreshToken"]);
-        $accessToken = $session->getAccessToken();
-    }
-    
-    $api = new SpotifyWebAPI\SpotifyWebAPI();
-    $api->setAccessToken($_SESSION["accessToken"]);
-    $user = $api->me();
-    $playid = $api->createPlaylist([
-            'name' => '@eu.jpe - TudoEm1'
-        ]);
+    session_start();
+
+          $api = new SpotifyWebAPI\SpotifyWebAPI();
+
+          // Fetch the saved access token from somewhere. A database for example.
+          $api->setAccessToken($_GET['code']);
+          $user = $api->me();
+          $playid = $api->createPlaylist([
+                'name' => '@eu.jpe - TudoEm1'
+            ]);
 
         echo $playid->id;
         $imageData = base64_encode(file_get_contents('cover.jpg'));

@@ -43,7 +43,7 @@
                   echo '</ul>
                   </div>
                   <div class="modal-footer">
-                  <form action="./processa.php" Method="POST">
+                  <form action="./processa.php?code='.$_GET['code'].'" Method="POST">
                     <button type="submit" class="btn btn-primary">Tudo pronto, Juntar Playlists!</button>
                   </form>
                   </div>
