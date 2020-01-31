@@ -28,7 +28,9 @@
         
         $api->updatePlaylistImage($playid->id, $imageData);
         
-
+            print_r($_SESSION['playSelection']);
+            echo 'auqi';
+            die();
         foreach($_SESSION['playSelection'] as $selected){
             echo $_SESSION['playSelection'];
             die();
