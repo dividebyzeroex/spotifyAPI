@@ -30,7 +30,7 @@
                     if(!empty($_POST['playselection'])){
                       foreach($_POST['playselection'] as $selected){
                         try {
-                          echo '<input type="checkbox" name="processaMusic[]" value="'.$selected.'" style="visibility:hidden;"/>';
+                          echo '<input type="checkbox" name="processaMusic[]" value="'.$selected.'" checked style="visibility:hidden;"/>';
                           $playlistName = $api->getPlaylist($selected);                   
                             echo'<li class="list-group-item">'.$playlistName->name.'</li>';
                         } catch (\Throwable $th) {
