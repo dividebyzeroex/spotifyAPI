@@ -45,25 +45,7 @@
         $playlists = $api->getUserPlaylists($user->id, [
             'limit' => 50
         ]);       
-        
-        if(isset($_GET["result"])){
-            if($_GET["result"] == "sucesso"){
-                echo '<div class="container-fluid">
-                <div class="alert alert-success" role="alert">
-                    <h4 class="alert-heading">Acabamos!</h4>
-                    <p>Agora você já pode abrir seu spotify e curtir a playlist que preparei para você com todas as suas musicas!</p>
-                    <hr>
-                    <p class="mb-0">Se você curtiu, me segue no insta para dar aquela moral!! <a href="https://www.instagram.com/eu.jpe?r=nametag" target="_blank">@eu.jpe</a></p>
-                </div>';
-
-            }else{
-                echo '<div class="alert alert-danger" role="alert">
-                    Tivemos um problema para criar sua playlist, causado por uma demora fora do normal. Podemos tentar novamete?
-                </div>';
-            }
-        }
-                
-            echo '<nav class="navbar navbar-light bg-light">
+        echo '<nav class="navbar navbar-light bg-light">
                     <div class="media">
                         <img class="align-self-start mr-3" src="'.(($user->images[0]->url != null|| strlen($user->images[0]->url)>0)?$user->images[0]->url:'avatar.jpg').'" alt="'.$user->display_name.'" width="64px"; height="64px">
                         <div class="media-body">

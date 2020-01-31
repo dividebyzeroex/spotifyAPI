@@ -14,43 +14,47 @@
 
         set_time_limit(1800);
         session_start();
-        try {
-            $api = new SpotifyWebAPI\SpotifyWebAPI();
 
-            // Fetch the saved access token from somewhere. A database for example.
-            $api->setAccessToken($_GET['code']);
-            $user = $api->me();
-            $playid = $api->createPlaylist([
-                'name' => '@eu.jpe - TudoEm1'
-            ]);       
-            $imageData = base64_encode(file_get_contents('cover.jpg'));
-            $api->updatePlaylistImage($playid->id, $imageData);
+        $api = new SpotifyWebAPI\SpotifyWebAPI();
 
-            foreach($_POST['processaMusic'] as $selected){            
-                $playlistTracks = $api->getPlaylistTracks($selected);
-            foreach ($playlistTracks->items as $track) {
-                    try {
-                        sleep(0.2);
-                        $api->addPlaylistTracks($playid->id, [
-                            $track->track->id
-                        ]);
-                    } catch (\Throwable $th) {
-                        
-                        //header('Location: app.php?result=erro');
-                        //die();
-                    }
+        // Fetch the saved access token from somewhere. A database for example.
+        $api->setAccessToken($_GET['code']);
+        $user = $api->me();
+        $playid = $api->createPlaylist([
+            'name' => '@eu.jpe - TudoEm1'
+        ]);       
+        $imageData = base64_encode(file_get_contents('cover.jpg'));
+        $api->updatePlaylistImage($playid->id, $imageData);
+    
+        foreach($_POST['processaMusic'] as $selected){            
+            $playlistTracks = $api->getPlaylistTracks($selected);
+           foreach ($playlistTracks->items as $track) {
+                try {
+                    sleep(0.2);
+                    $api->addPlaylistTracks($playid->id, [
+                        $track->track->id
+                    ]);
+                   } catch (\Throwable $th) {
+                    
+                    //header('Location: app.php?result=erro');
+                    //die();
                 }
-                
             }
-
-            ob_start();
-            header('Location: https://minhaplaylist.azurewebsites.net/');
-            exit();
-        } catch (\Throwable $th) {
-            echo $th;
-            die();
+            
         }
 
+        echo 
+        '<div class="container-fluid">
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Acabamos!</h4>
+                <p>Agora você já pode abrir seu spotify e curtir a playlist que preparei para você com todas as suas musicas!</p>
+                <hr>
+                <p class="mb-0">Se você curtiu, me segue no insta para dar aquela moral!! <a href="https://www.instagram.com/eu.jpe?r=nametag" target="_blank">@eu.jpe</a></p>
+            </div>
+            <div class="text-center">
+                <a href="https://minhaplaylist.azurewebsites.net/" class="btn btn-success">Ir para minhas Playlists</a>
+            </div>
+        </div>';
 ?>
 </body>
 </html>
