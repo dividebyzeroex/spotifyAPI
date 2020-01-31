@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </nav>
-                <form method="POST" action="/.review.php">
+                <form method="POST" action="./review.php">
                 <div class="row">';
         foreach ($playlists->items as $playlist) {
             echo '<div class="col-sm-2">
