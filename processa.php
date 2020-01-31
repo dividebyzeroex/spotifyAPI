@@ -44,7 +44,7 @@
         }
 
         echo 
-        '<div class="container-fluid">
+        '<div class="container-fluid modal-dialog modal-dialog-centered">
             <div class="alert alert-success" role="alert">
                 <h4 class="alert-heading">Acabamos!</h4>
                 <p>Agora você já pode abrir seu spotify e curtir a playlist que preparei para você com todas as suas musicas!</p>
