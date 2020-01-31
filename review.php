@@ -31,8 +31,8 @@
         }
           
         } catch (\Throwable $th) {
-            //$session->refreshAccessToken($_SESSION["refreshToken"]);
-            //$accessToken = $session->getAccessToken();
+            $session->refreshAccessToken($_SESSION["refreshToken"]);
+            $accessToken = $session->getAccessToken();
         }
         
         $api = new SpotifyWebAPI\SpotifyWebAPI();
