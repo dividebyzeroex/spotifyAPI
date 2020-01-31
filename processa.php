@@ -7,7 +7,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
-    <body style="background: url('background-cover.jpg') no-repeat fixed center;">
+    <body>
 <?php
         
         require 'vendor/autoload.php';
@@ -44,7 +44,7 @@
         }
 
         echo 
-        '<div class="container-fluid modal-dialog-centered">
+        '<div class="container-fluid">
             <div class="alert alert-success" role="alert">
                 <h4 class="alert-heading">Acabamos!</h4>
                 <p>Agora você já pode abrir seu spotify e curtir a playlist que preparei para você com todas as suas musicas!</p>
