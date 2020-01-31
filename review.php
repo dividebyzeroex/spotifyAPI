@@ -49,10 +49,9 @@
                   <div class="modal-body">
                   <ul class="list-group list-group-flush">';
                   if(!empty($_POST['playselection'])){
-                    print_r($_POST['playselection']);
-                      $_SESSION["playSelection"] = $_POST['playselection'];
-                      foreach($_POST['playselection'] as $selected){
-                          $playlistName = $api->getPlaylist($selected);                    
+                    foreach($_POST['playselection'] as $selected){
+                          $playlistName = $api->getPlaylist($selected); 
+                          echo 'aqio';                   
                           echo'<li class="list-group-item">'.$playlistName->name.'</li>';
                       }
                     echo '<script>
