@@ -28,7 +28,6 @@
                   <ul class="list-group list-group-flush">
                   <form action="./processa.php?code='.$_GET['code'].'" Method="POST">';
                     if(!empty($_POST['playselection'])){
-                      $_SESSION['processaMusic'] = $_POST['playselection'];
                       foreach($_POST['playselection'] as $selected){
                         try {
                           echo '<input type="checkbox" name="processaMusic[]" value="'.$selected.'" style="visibility:hidden;"/>';
