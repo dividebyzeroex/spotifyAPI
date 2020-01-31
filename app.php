@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </nav>
-                <form method="POST" action="./review.php&code="'.$_GET['code'].'>
+                <form method="POST" action="./review.php?code="'.$_GET['code'].'>
                 <div class="row">';
         foreach ($playlists->items as $playlist) {
             echo '<div class="col-sm-2">
