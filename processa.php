@@ -14,8 +14,6 @@
     set_time_limit(600);
     session_start();
 
-    session_start();
-
           $api = new SpotifyWebAPI\SpotifyWebAPI();
 
           // Fetch the saved access token from somewhere. A database for example.
@@ -25,13 +23,15 @@
                 'name' => '@eu.jpe - TudoEm1'
             ]);
 
-        echo $playid->id;
+       
         $imageData = base64_encode(file_get_contents('cover.jpg'));
         
         $api->updatePlaylistImage($playid->id, $imageData);
         
 
         foreach($_SESSION['playSelection'] as $selected){
+            echo $_SESSION['playSelection'];
+            die();
             $playlistTracks = $api->getPlaylistTracks($selected);
             
             foreach ($playlistTracks->items as $track) {
