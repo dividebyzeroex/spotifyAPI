@@ -7,9 +7,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
-    <body>
+    <body style="background: url('background-cover.jpg') no-repeat fixed center;">
       <?php
           require 'vendor/autoload.php';
+          session_start();
 
           $session = new SpotifyWebAPI\Session(
             'd0233e3bddf647c3821fac68bb2d4aa5',
@@ -19,34 +20,31 @@
         
         // Request a access token using the code from Spotify
         try {
-            if(isset($_GET['code'])){
-                $session->requestAccessToken($_GET['code']);
-                $_SESSION["codeSession"] = $_GET['code'];
-                $accessToken = $session->getAccessToken();
-                $_SESSION["refreshToken"] = $session->getRefreshToken();
-            }else{
-                $accessToken = $session->getAccessToken();
-                $_SESSION["refreshToken"] = $session->getRefreshToken();
-                $session->refreshAccessToken($_SESSION["refreshToken"]);
-                $accessToken = $session->getAccessToken();
-            }
-          
-        } catch (\Throwable $th) {
+          if(isset($_GET['code'])){
+            $session->requestAccessToken($_GET['code']);
+            $_SESSION["codeSession"] = $_GET['code'];
+            $accessToken = $session->getAccessToken();
+            $_SESSION["refreshToken"] = $session->getRefreshToken();
+        }else{
             $session->refreshAccessToken($_SESSION["refreshToken"]);
             $accessToken = $session->getAccessToken();
+        }
+          
+        } catch (\Throwable $th) {
+            //$session->refreshAccessToken($_SESSION["refreshToken"]);
+            //$accessToken = $session->getAccessToken();
         }
         
         $api = new SpotifyWebAPI\SpotifyWebAPI();
         $api->setAccessToken($accessToken);
 
-          session_start();
           echo '<div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Vamos revisar juntos?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <a href="./index.php" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
-                    </button>
+                    </a>
                   </div>
                   <div class="modal-body">
                   <ul class="list-group list-group-flush">';

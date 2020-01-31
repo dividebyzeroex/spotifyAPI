@@ -5,7 +5,7 @@ session_start();
 $session = new SpotifyWebAPI\Session(
     'd0233e3bddf647c3821fac68bb2d4aa5',
     '899917c0583a471f8cf524aba161daf0',
-    'https://minhaplaylist.azurewebsites.net/app.php'
+    'http://localhost:81/OrganizaSpotify/app.php'
 );
 //$_SESSION["accessToken"] = $accessToken;
 

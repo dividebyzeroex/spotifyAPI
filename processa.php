@@ -17,7 +17,7 @@
     $session = new SpotifyWebAPI\Session(
         'd0233e3bddf647c3821fac68bb2d4aa5',
         '899917c0583a471f8cf524aba161daf0',
-        'https://minhaplaylist.azurewebsites.net/app.php'
+        'https://minhaplaylist.azurewebsites.net'
     );
     
     // Request a access token using the code from Spotify
