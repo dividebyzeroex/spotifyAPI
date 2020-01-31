@@ -46,8 +46,9 @@
             
         }
 
+        ob_start();
         header('Location: https://minhaplaylist.azurewebsites.net/');
-        die();
+        exit();
 
 ?>
 </body>
