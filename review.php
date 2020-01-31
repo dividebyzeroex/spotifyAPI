@@ -16,6 +16,7 @@
 
           // Fetch the saved access token from somewhere. A database for example.
           $api->setAccessToken($accessToken);
+          echo "token".$accessToken;
 
           echo '<div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
