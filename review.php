@@ -18,20 +18,21 @@
             'https://minhaplaylist.azurewebsites.net/review.php'
           );
         
-        // Request a access token using the code from Spotify
+        /// Request a access token using the code from Spotify
         try {
-          if(isset($_GET['code'])){
-            $session->requestAccessToken($_GET['code']);
-            $_SESSION["codeSession"] = $_GET['code'];
-            $accessToken = $session->getAccessToken();
-            $_SESSION["refreshToken"] = $session->getRefreshToken();
-        }else{
+          if(isset($_SESSION["codeSession"])){
+           $session->requestAccessToken($_SESSION["codeSession"]);
+           $_SESSION["codeSession"] = $_SESSION["codeSession"];
+           $accessToken = $session->getAccessToken();
+           $_SESSION["refreshToken"] = $session->getRefreshToken();
+          }else{
+                $session->refreshAccessToken($_SESSION["refreshToken"]);
+                $accessToken = $session->getAccessToken();
+            }
+      
+        } catch (\Throwable $th) {
             $session->refreshAccessToken($_SESSION["refreshToken"]);
             $accessToken = $session->getAccessToken();
-        }
-          
-        } catch (\Throwable $th) {
-           //
         }
         
         $api = new SpotifyWebAPI\SpotifyWebAPI();
