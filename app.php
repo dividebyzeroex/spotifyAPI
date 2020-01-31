@@ -22,7 +22,7 @@
         // Request a access token using the code from Spotify
         try {
             if(isset($_GET['code'])){
-                
+
                 $session->requestAccessToken($_GET['code']);
                 $_SESSION["codeSession"] = $_GET['code'];
                 $accessToken = $session->getAccessToken();
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </nav>
-                <form method="POST" action="./review.php">
+                <form method="POST" action="./review.php&code="'.$_GET['code'].'>
                 <div class="row">';
         foreach ($playlists->items as $playlist) {
             echo '<div class="col-sm-2">
