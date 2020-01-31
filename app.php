@@ -38,6 +38,7 @@
         
         $api = new SpotifyWebAPI\SpotifyWebAPI();
         $api->setAccessToken($accessToken);
+        $_SESSION["accessToken"] = $accessToken;
         
         $user = $api->me();
         $playlists = $api->getUserPlaylists($user->id, [

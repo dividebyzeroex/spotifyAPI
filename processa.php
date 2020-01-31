@@ -32,7 +32,7 @@
     }
     
     $api = new SpotifyWebAPI\SpotifyWebAPI();
-    $api->setAccessToken($accessToken);
+    $api->setAccessToken($_SESSION["accessToken"]);
     $user = $api->me();
     $playid = $api->createPlaylist([
             'name' => '@eu.jpe - TudoEm1'
