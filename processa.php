@@ -31,7 +31,7 @@
         foreach($_POST['processaMusic'] as $selected){            
             $playlistTracks = $api->getPlaylistTracks($selected);
             print_r($playlistTracks->items);
-            die()
+            die();
             foreach ($playlistTracks->items as $track) {
                 try {
                     sleep(0.3);
