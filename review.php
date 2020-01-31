@@ -49,7 +49,7 @@
                   <div class="modal-body">
                   <ul class="list-group list-group-flush">';
                   if(!empty($_POST['playselection'])){
-                    echo 'aqui';
+                    print_r($_POST['playselection']);
                       $_SESSION["playSelection"] = $_POST['playselection'];
                       foreach($_POST['playselection'] as $selected){
                           $playlistName = $api->getPlaylist($selected);                    
