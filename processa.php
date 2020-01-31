@@ -47,7 +47,7 @@
         }
 
         echo 'aqui';
-        header('Location: ./index.php?result=sucesso');
+        header('Location: index.php');
         die();
 
 ?>
