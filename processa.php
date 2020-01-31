@@ -45,7 +45,7 @@
             
         }
 
-        header('Location: app.php?result=sucesso');
+        header('Location: ./index.php?result=sucesso');
         die();
 
 ?>
