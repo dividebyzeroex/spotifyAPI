@@ -31,8 +31,7 @@
         }
           
         } catch (\Throwable $th) {
-            $session->refreshAccessToken($_SESSION["refreshToken"]);
-            $accessToken = $session->getAccessToken();
+           //
         }
         
         $api = new SpotifyWebAPI\SpotifyWebAPI();
@@ -50,9 +49,13 @@
                   <ul class="list-group list-group-flush">';
                   if(!empty($_POST['playselection'])){
                     foreach($_POST['playselection'] as $selected){
-                          $playlistName = $api->getPlaylist($selected); 
-                          echo 'aqio';                   
+                      try {
+                        $playlistName = $api->getPlaylist($selected);                   
                           echo'<li class="list-group-item">'.$playlistName->name.'</li>';
+                      } catch (\Throwable $th) {
+                        echo $th; 
+                      }
+                          
                       }
                     echo '<script>
                           $("#exampleModalCenter").modal();
