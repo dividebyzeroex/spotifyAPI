@@ -31,7 +31,7 @@
            $_SESSION["refreshToken"] = $session->getRefreshToken();
            echo '5';
           }else{
-            echo '6'
+            echo '6';
             $session->refreshAccessToken($_SESSION["refreshToken"]);
             echo '7';
             $accessToken = $session->getAccessToken();
