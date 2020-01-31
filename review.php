@@ -31,9 +31,11 @@
            $_SESSION["refreshToken"] = $session->getRefreshToken();
            echo '5';
           }else{
-                $session->refreshAccessToken($_SESSION["refreshToken"]);
-                $accessToken = $session->getAccessToken();
-            }
+            echo '6'
+            $session->refreshAccessToken($_SESSION["refreshToken"]);
+            echo '7';
+            $accessToken = $session->getAccessToken();
+          }
       
         } catch (\Throwable $th) {
             echo $th;
